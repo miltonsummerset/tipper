@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Swing App</title>
-    <!-- CheerpJ Loader Skript -->
+    <title>Tipper App</title>
+    <!-- CheerpJ 3.0 Loader -->
     <script src="https://cjrtnc.leaningtech.com/3.0/cj3load.js"></script>
     <style>
         html, body {
@@ -17,7 +17,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: sans-serif;
         }
         #container {
             width: 100vw;
@@ -29,21 +28,22 @@
     <div id="container"></div>
 
     <script>
-        async function startApp() {
-            // Initialisierung für CheerpJ 3.0
+        async function runCheerpJ() {
+            // Warten, bis cheerpjInit im Fenster verfügbar ist
+            while (typeof cheerpjInit === "undefined") {
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+
+            // CheerpJ initialisieren
             await cheerpjInit();
             cheerpjCreateDisplay(window.innerWidth, window.innerHeight, document.getElementById("container"));
             
-            // Starte deine JAR-Datei (Dateiname EXAKT anpassen!)
-            await cheerpjRunMain("main.TipperMain", "/app/TipperGUI.jar");        
+            // Hauptklasse ausführen
+            await cheerpjRunMain("main.TipperMain", "/app/TipperGUI.jar");
         }
 
-        // Sicherstellen, dass das CheerpJ-Skript vollständig geladen ist
-        if (typeof cheerpjInit === "function") {
-            startApp();
-        } else {
-            window.addEventListener("load", startApp);
-        }
+        // Starten, sobald die Seite geladen ist
+        window.addEventListener("load", runCheerpJ);
     </script>
 </body>
 </html>
