@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tipper</title>
-    <!-- CheerpJ Runtime aus dem CDN einbinden -->
+    <title>Meine Swing App</title>
+    <!-- CheerpJ Loader Skript -->
     <script src="https://cjrtnc.leaningtech.com/3.0/cj3load.js"></script>
     <style>
         html, body {
@@ -15,7 +15,6 @@
             background-color: #222;
             color: #fff;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: sans-serif;
@@ -31,19 +30,20 @@
 
     <script>
         async function startApp() {
-            // CheerpJ initialisieren
+            // Initialisierung für CheerpJ 3.0
             await cheerpjInit();
-            
-            // Anzeige-Container festlegen
             cheerpjCreateDisplay(window.innerWidth, window.innerHeight, document.getElementById("container"));
             
-            // JAR-Datei ausführen
-            // Parameter 1: Pfad zur JAR-Datei im Webspace (/app/Filename.jar)
-            // Parameter 2: Name der Hauptklasse inklusive Package (z. B. "com.beispiel.Main" oder "Main")
-            await cheerpjRunMain("miltonsummerset.main.Tippermain", "/app/TipperGUI.jar");
+            // Starte deine JAR-Datei (Dateiname EXAKT anpassen!)
+            await cheerpjRunJar("/app/TipperGUI.jar");
         }
 
-        startApp();
+        // Sicherstellen, dass das CheerpJ-Skript vollständig geladen ist
+        if (typeof cheerpjInit === "function") {
+            startApp();
+        } else {
+            window.addEventListener("load", startApp);
+        }
     </script>
 </body>
 </html>
