@@ -35,7 +35,7 @@
             cheerpjCreateDisplay(window.innerWidth, window.innerHeight, document.getElementById("container"));
             
             // Starte deine JAR-Datei (Dateiname EXAKT anpassen!)
-            await cheerpjRunJar("/app/TipperGUI.jar");
+            await cheerpjRunMain("main.TipperMain", "/app/TipperGUI.jar");        
         }
 
         // Sicherstellen, dass das CheerpJ-Skript vollständig geladen ist
